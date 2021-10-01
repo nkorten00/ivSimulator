@@ -347,7 +347,7 @@ function calculateCheck(){
         
     }
     if(inputRate == 0){
-        checkRate = inputVolume/inputDuration;
+        checkRate = (inputVolume/inputDuration)*60;
         checkVolume = inputVolume;
         checkDuration = inputDuration;
         
