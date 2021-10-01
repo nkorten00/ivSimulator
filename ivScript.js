@@ -161,7 +161,9 @@ function onOffFunct(){
         ivState = "on";
         displayIvState.innerHTML = "Powered On - Set State";
       displayOnLed.src = "green.png";
-      displayLabelsOn()
+      displaySpanAnimation.innerHTML = "";
+      displayLabelsOn();
+      stopAnimation();
     }
     else{
     ivState = "off";
@@ -170,7 +172,9 @@ function onOffFunct(){
     displayDuration.innerHTML = " ";
     displayVolume.innerHTML = " ";
     displayOnLed.src = "blue.png";
+    displaySpanAnimation.innerHTML = "";
     displayLabelsOff();
+    stopAnimation();
 }
     
 }
