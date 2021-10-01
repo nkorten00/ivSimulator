@@ -319,6 +319,7 @@ function down1(){
 
     if(booDuration == true){
         duration -=1;
+        displayDuration.innerHTML = duration;
     }
 
 }
