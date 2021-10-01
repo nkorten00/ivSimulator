@@ -1,0 +1,278 @@
+<html>
+    <head>
+            <title>IV Sim</title>
+            <style>
+                .container{
+                    height:100vh;
+                    display:grid;
+                    grid-template-rows: 15% 75% 10%;
+                    grid-template-columns: minmax(0, 70%) 30%;
+                    grid-template-areas: 
+                     "header header"
+                    "pumpBox checkBox"
+                     "footer footer";
+                    grid-column-gap: 20px;
+                    background-color: lightgray;
+                    
+                }
+
+                .pumpbox{
+                    grid-area: pumpBox;
+                    border: solid 2px black;
+                    padding: 20px;
+      
+                }
+
+                .pump{
+                    height: 500px;
+                    max-width: 300px;
+                    margin-top: 10px ;
+                    margin-bottom: 10px;
+                    margin-left: 20%;
+                    margin-right: 20% ;
+                    border: solid 2px black;
+                    background-color: beige;
+                }
+
+
+                .checkBox{
+                    grid-area: checkBox;
+                    border: solid 2px black;
+                    padding: 20px;
+                    justify-items: center;
+                   
+                }
+
+                .tables{
+                    margin:0 auto;
+
+                }
+
+                #inputs{
+                    position: relative;
+                    top: 35%;
+                    padding: 10px;
+                    font-family: Helvetica;
+                    
+                }
+
+                #checkBoxHeading{
+                    display:table;
+                    margin:0 auto;
+                    font-family: Helvetica; font-size: 30px; 
+                }
+
+                #submitCheckBox{
+                    font-size: small; font-family: Helvetica;
+                    padding-top: 2px;
+                    padding-bottom: 2px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    
+                }
+
+                
+
+                #ivState{
+                    display:inline-block;
+                    height: 20px;
+                    width: 300px;
+                    border: solid 1px black;
+                    margin: 0 auto;
+                    font-family: Helvetica;
+                    background-color: rgb(200, 228, 238);
+                }
+
+                .displayBox{
+                    display:inline-block;
+                    height: 20px;
+                    width: 100px;
+                    
+                }
+
+               #displayData{
+                   border: solid 1px black;
+                   padding:5px;
+                   margin-top: 10px;
+                   margin-left: 5% ;
+                   margin-right:5%;
+                   background-color: rgb(200, 228, 238);
+               }
+                
+                .ivButtons{
+                    font-size: small; font-family: Helvetica;
+                    padding-top: 4px;
+                    padding-bottom: 4px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    border-radius: 5px;
+
+                }
+
+                #startB{
+                    background-color: greenyellow;
+
+                }
+
+                #holdB{
+                    background-color: red;
+
+                }
+
+                #onOff{
+                    margin-top: 10px;
+                    margin-right: 40%;
+                    font-size:20px; font-family: Helvetica;
+                    border-radius: 15px;
+                }
+
+                .led{
+                    width:10px;
+                    height:10px ;
+                }
+
+                #onOffLed{
+                    width:30px;
+                    height:30px;
+                    margin-right: 10px;
+                    margin-top: 10px;
+                }
+
+                #pumpAnimation{
+                    display:inline-block;
+                    height: 30px;
+                    width: 100px;
+                    border: solid 1px black;
+                    margin: 0 auto;
+                    font-family: Helvetica;
+                    font-size: 30px;
+                    color:green;
+                    
+                }
+
+            </style>
+
+
+    </head>
+
+    <body onload="welcomeAlert()">
+    
+        <div class='container'>
+            
+            <div class='pumpBox'>
+                <div class="pump">
+                    <span id="ivState"></span>
+                    <div id="displayData">
+                    <table class="tables">
+                        <tr>
+                            <td id="displayRateLabel"></td>
+                            <td><span class="displayBox" id="displayRate"></span></td>
+                            <td id="displayRateLabel2"></td>
+                        </tr>
+                        <tr>
+                            <td id="displayVolumeLabel"></td>
+                            <td><span class="displayBox"  id="displayVolume"></span></td>
+                            <td id="displayVolumeLabel2"></td>
+                        </tr>
+                        <tr>
+                            <td id="displayDurationLabel"></td>
+                            <td><span class="displayBox" id="displayDuration"></span></td>
+                            <td id="displayDurationLabel2"></td>
+                        </tr>
+                        
+
+                    </table>
+                 </div>
+
+                    <table class="tables">
+                        <tr>
+                            <td><button class="ivButtons" onClick="setRate()">Rate</button></td>
+                            <td><button class="ivButtons" onClick="setVolume()">VBTI</button></td>
+                            <td><button class="ivButtons" onClick="setDuration()">Duration</button></td>
+                        </tr>
+                    </table>
+
+                    <table class="tables">
+                        <tr>
+                           
+                            <td><button class="ivButtons" onClick="up1()">&#8593</button></td>
+                            <td><button class="ivButtons" onClick="up10()">&#8593 &#8593</button></td>
+                             
+                             
+                            <td><button class="ivButtons" onClick="down1()">&#8595</button></td>
+                            <td><button class="ivButtons" onClick="down10()">&#8595 &#8595</button></td>
+                           
+                        </tr>
+                    </table>
+
+                    <table class="tables">
+                        <tr>
+                            <td><button class="ivButtons" id="startB" onClick="start()">Start</button></td>
+                            <td><img src="blue.png" class="led" id="startLed"><img></td>
+                            <td><button class="ivButtons">&#xf6a9;</button></td>
+                            
+                            
+                        </tr>
+                        <tr>
+                            <td><button class="ivButtons" id="holdB" onClick="hold()">Hold</button></td>
+                            <td><img src="blue.png" class="led" id="holdLed"><img></td>
+                            <td><button class="ivButtons" 
+                            onClick="alert('Please enter 2 values into the measurements box and press submit. Turn the IV on and enter the 3 values. Press start to check your calculations.')">&quest;</button></td>
+                            
+                            
+                        </tr>
+                    </table>
+                    <table class="tables">
+                        <tr>
+                            <td><span id="pumpAnimation"></span></td>
+                        </tr>
+                    </table>
+                   
+                   
+                    <table class="tables" >
+                        <tr>
+                            <td><img src="blue.png" id="onOffLed"></img></td>
+                            <td><button class="ivButtons" id="onOff" id="displayOnOff" onClick="onOffFunct()">On/Off</button></td>
+                            
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+        <div class='checkBox'>
+                <div id='inputs'>
+                    <span id="checkBoxHeading" >Measurements</span>   
+                <table class="tables">
+                    <tr>
+                         <td><span >Rate:<span> </td>
+                         <td><input type="text" id="inputRate" /> mls/hr</td>
+                     </tr>
+                    <tr>
+                      <td><span >VBTI:</span></td> 
+                      <td><input type="text" id="inputVolume" /> ml</td>
+                     </tr>
+                     <tr>
+                          <td><span >Duration:</span> </td>
+                          <td><input type="text" id="inputHours" /> hours</td>
+                     </tr>
+                     <tr>
+                        <td><span >Duration:</span> </td>
+                        <td><input type="text" id="inputMinutes" /> minutes</td>
+                   </tr>
+                     <tr>
+                         <td><button id="submitCheckBox" onClick = "calculateCheck()">Submit</button></td>
+                        <td><button id="submitCheckBox" onClick = "reset()">Reset</button></td>
+                     </tr>
+                </table>
+                    
+              </div>
+            </div>
+
+        </div>
+
+    </body>
+    <script src="ivScript.js"></script>
+   
+</html>
